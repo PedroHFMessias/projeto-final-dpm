@@ -3,34 +3,26 @@ import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadComponent: () =>
-          import('../tab1/tab1.page').then((m) => m.Tab1Page),
+        path: 'agendar',
+        loadComponent: () => import('../agendar/agendar.page').then((m) => m.AgendarPage),
       },
       {
-        path: 'tab2',
-        loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+        path: 'meus-horarios',
+        loadComponent: () => import('../meus-horarios/meus-horarios.page').then((m) => m.MeusHorariosPage),
       },
       {
-        path: 'tab3',
-        loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+        path: 'perfil', // A rota para a página de perfil deve estar aqui
+        loadComponent: () => import('../perfil/perfil.page').then((m) => m.PerfilPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: 'agendar',
         pathMatch: 'full',
       },
     ],
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full',
   },
 ];
