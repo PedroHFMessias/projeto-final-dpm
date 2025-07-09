@@ -13,8 +13,6 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { logOutOutline } from 'ionicons/icons';
-import { AgendamentoService } from '../shared/services/agendamento.service';
-import { UsuarioService } from '../shared/services/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,37 +22,18 @@ import { UsuarioService } from '../shared/services/usuario.service';
   imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonAvatar, IonButton, IonIcon]
 })
 export class PerfilPage {
-  // Inicializamos as variáveis como vazias
-  userName: string = '';
-  userEmail: string = '';
 
-  constructor(
-    private router: Router,
-    private agendamentoService: AgendamentoService,
-    private usuarioService: UsuarioService
-  ) {
+  // Propriedades com os dados do usuário
+  userName: string = 'Usuário Exemplo';
+  userEmail: string = 'usuario@email.com';
+
+  constructor(private router: Router) {
     addIcons({ logOutOutline });
-  }
-  
-  // --- ESTA É A PARTE CRUCIAL QUE FALTAVA ---
-  // Este método é executado toda vez que a página vai ser exibida
-  ionViewWillEnter() {
-    console.log('[PERFIL] Página sendo exibida, buscando dados do usuário...');
-    const usuarioLogado = this.usuarioService.getUsuarioLogado();
-    
-    if (usuarioLogado) {
-      // Atualiza as variáveis da página com os dados do usuário logado
-      this.userName = usuarioLogado.nome;
-      this.userEmail = usuarioLogado.email;
-      console.log('[PERFIL] Dados encontrados:', this.userName);
-    } else {
-      console.log('[PERFIL] Nenhum usuário logado encontrado.');
-    }
   }
 
   logout() {
-    this.agendamentoService.limparAgendamentos();
-    this.usuarioService.logout();
+    console.log('Usuário deslogado.');
+    // Navega o usuário de volta para a tela de login
     this.router.navigate(['/features/auth/pages/login']);
   }
 }
